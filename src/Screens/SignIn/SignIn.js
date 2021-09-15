@@ -40,7 +40,7 @@ const SignIn = (props) => {
                     <View style={{marginTop:150}}></View>
                     <View style={styles._email_input_main}>
                         <TextInput
-                            placeholder="User name / Email"
+                            placeholder="Email"
                             style={styles._input}
                             underlineColor="white"
                             placeholderTextColor="white"
@@ -74,6 +74,7 @@ const SignIn = (props) => {
                     </View>
                     <TouchableOpacity
                         style={styles.button}
+                        onPress ={() => props.navigation.navigate("MainScreen")}
                     >
                         <Text style={styles._button_txt}>Sign In</Text>
                     </TouchableOpacity>

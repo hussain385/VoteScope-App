@@ -45,15 +45,6 @@ const SignUp = (props) => {
 
                     <View style={styles._email_input_main}>
                         <TextInput
-                            placeholder="User name"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                        />
-                    </View>
-
-                    <View style={styles._email_input_main}>
-                        <TextInput
                             placeholder="Email"
                             style={styles._input}
                             underlineColor="white"
@@ -144,6 +135,7 @@ const SignUp = (props) => {
 
                     <TouchableOpacity
                         style={styles.button}
+                        onPress ={() => props.navigation.navigate("MainScreen")}
                     >
                         <Text style={styles._button_txt}>Sign Up</Text>
                     </TouchableOpacity>
