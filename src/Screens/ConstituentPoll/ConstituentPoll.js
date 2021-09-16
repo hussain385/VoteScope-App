@@ -12,7 +12,7 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
-const MainScreen = (props) => {
+const ConstituentPoll = (props) => {
     const [dimensions, setDimensions] = useState({ window, screen });
     const onChange = ({ window, screen }) => {
         setDimensions({ window, screen });
@@ -171,4 +171,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MainScreen;
+export default ConstituentPoll;

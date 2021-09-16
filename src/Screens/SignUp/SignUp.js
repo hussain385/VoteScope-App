@@ -9,12 +9,14 @@ import {
     TextInput,
 } from "react-native";
 import {
-    Ionicons
+    Ionicons,
+    Feather 
 } from "@expo/vector-icons";
 import {
     Select,
     CheckIcon,
 } from "native-base"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
@@ -22,7 +24,7 @@ const SignUp = (props) => {
     const [dimensions, setDimensions] = useState({ window, screen });
     const [eyeIcon, setEyeIcon] = useState(true);
     const [reEnter, setReEnter] = useState(true);
-    let [language, setLanguage] = React.useState("")
+    let [rue, setRue] = React.useState("")
     const onChange = ({ window, screen }) => {
         setDimensions({ window, screen });
     };
@@ -34,7 +36,21 @@ const SignUp = (props) => {
         };
     });
 
-
+    const handler_signup = async (value) => {
+        try {
+          await AsyncStorage.setItem("user", JSON.stringify(rue));
+          if (rue === "") {
+            alert("Please Select Rue !")
+          } else if (rue === "city") {
+            props.navigation.navigate("CityPolls");
+          }
+          else if (rue === "constituent") {
+            props.navigation.navigate("ConstituentPoll");
+          }
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
     return (
         <View style={styles.container}>
 
@@ -106,12 +122,19 @@ const SignUp = (props) => {
 
                     <View style={{ marginTop: 10 }}>
                         <Select
-                            selectedValue={language}
+                            selectedValue={rue}
                             minWidth={200}
                             color="white"
                             accessibilityLabel="Select Rue"
                             placeholder="Select Rue"
-                            onValueChange={(itemValue) => setLanguage(itemValue)}
+                            dropdownIcon={ <Feather 
+                                name="chevron-down"
+                                size={24}
+                                color="white"
+                                style={{marginRight:10}}
+                            />}
+                            
+                            onValueChange={(itemValue) => setRue(itemValue)}
                             _selectedItem={{
                                 bg: "cyan.600",
                                 endIcon: <CheckIcon size={4} color="white" />,
@@ -122,20 +145,17 @@ const SignUp = (props) => {
                                 fontFamily: "Poppins-Medium",
                                 marginBottom: -7,
                                 height: 55,
-                                letterSpacing: 0.5
+                                letterSpacing: 0.5,
                             }}
                         >
-                            <Select.Item label="JavaScript" value="js" />
-                            <Select.Item label="TypeScript" value="ts" />
-                            <Select.Item label="C" value="c" />
-                            <Select.Item label="Python" value="py" />
-                            <Select.Item label="Java" value="java" />
+                            <Select.Item label="City" value="city" />
+                            <Select.Item label="Constituent" value="constituent" />
                         </Select>
                     </View>
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress ={() => props.navigation.navigate("MainScreen")}
+                        onPress={() => handler_signup()}
                     >
                         <Text style={styles._button_txt}>Sign Up</Text>
                     </TouchableOpacity>

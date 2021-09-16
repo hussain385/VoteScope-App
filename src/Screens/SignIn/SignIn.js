@@ -11,6 +11,7 @@ import {
 import {
     Ionicons
 } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
@@ -30,6 +31,22 @@ const SignIn = (props) => {
     });
 
 
+
+    const handler_Login = async () => {
+        try {
+            var rue = await AsyncStorage.getItem("user");
+            rue = JSON.parse(rue);
+            if (rue === "") {
+                alert("Sign Up Required !")
+            } else if (rue === "city") {
+                props.navigation.navigate("CityPolls");
+            } else if (rue === "constituent") {
+                props.navigation.navigate("ConstituentPoll");
+            }
+        } catch (e) {
+            console.log(e.message);
+        }
+    };
     return (
         <View style={styles.container}>
 
@@ -37,7 +54,7 @@ const SignIn = (props) => {
                 <View style={{ margin: 20 }}>
 
                     <Text style={styles._heading}>Sign In</Text>
-                    <View style={{marginTop:150}}></View>
+                    <View style={{ marginTop: 150 }}></View>
                     <View style={styles._email_input_main}>
                         <TextInput
                             placeholder="Email"
@@ -74,7 +91,7 @@ const SignIn = (props) => {
                     </View>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress ={() => props.navigation.navigate("MainScreen")}
+                        onPress={() => handler_Login()}
                     >
                         <Text style={styles._button_txt}>Sign In</Text>
                     </TouchableOpacity>
@@ -88,7 +105,7 @@ const SignIn = (props) => {
                     <View style={styles._register_main}>
                         <Text style={styles._new_user}>Don’t have an account ?</Text>
                         <TouchableOpacity
-                        onPress={() => props.navigation.navigate("SignUp")}>
+                            onPress={() => props.navigation.navigate("SignUp")}>
                             <Text style={styles._register}> Sign Up</Text>
                         </TouchableOpacity>
                     </View>

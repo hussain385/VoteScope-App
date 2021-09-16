@@ -1,8 +1,12 @@
 import SignUp from './SignUp/SignUp';
 import SignIn from './SignIn/SignIn';
-import MainScreen from './MainScreen/MainScreen'
+import ConstituentPoll from './ConstituentPoll/ConstituentPoll';
+import CityPolls from './CityPolls/CityPolls';
+import PollResult from './PollResult/PollResult'
 export {
     SignUp,
     SignIn,
-    MainScreen
+    ConstituentPoll,
+    CityPolls,
+    PollResult
 }
