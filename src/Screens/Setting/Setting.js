@@ -8,13 +8,15 @@ import {
     ScrollView,
     TextInput
 } from "react-native";
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const Setting = (props) => {
     const [dimensions, setDimensions] = useState({ window, screen });
     const [email, onChangeEmail] = React.useState("hishmatrai.2018@gmail.com");
-    const [edit, setEdit] = useState(false);
+    const [password, onChangePassword] = React.useState("hishmatrai");
+    const [editEmail, setEditEmail] = useState(false);
+    const [editPassword, setEditPassword] = useState(false);
 
     const onChange = ({ window, screen }) => {
         setDimensions({ window, screen });
@@ -37,21 +39,72 @@ const Setting = (props) => {
             </View>
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
                 <View style={styles._main} >
-                    <View style={styles._email_input_main}>
-                        <TextInput
-                            placeholder="Email"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                            value={email}
-                            onChangeText={onChangeEmail}
-                            editable={edit}
-                            selectTextOnFocus={edit}
-                        />
-                        <TouchableOpacity  onPress={() => setEdit(!edit)}>
-                            <MaterialIcons name="edit" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
+                    {editEmail ?
+                        <View style={styles._email_input_main}>
+                            <TextInput
+                                placeholder="Email"
+                                style={styles._input}
+                                underlineColor="white"
+                                placeholderTextColor="white"
+                                value={email}
+                                onChangeText={onChangeEmail}
+                                editable={true}
+                                returnKeyType={"next"}
+                                autoFocus={true}
+                            />
+                            <TouchableOpacity onPress={() => setEditEmail(!editEmail)}>
+                                <Feather name="check" size={24} color="white" />
+
+                            </TouchableOpacity>
+                        </View> : <View style={styles._email_input_main}>
+                            <TextInput
+                                placeholder="Email"
+                                style={styles._input}
+                                underlineColor="white"
+                                placeholderTextColor="white"
+                                value={email}
+                                onChangeText={onChangeEmail}
+                                editable={false}
+
+                            />
+                            <TouchableOpacity onPress={() => setEditEmail(!editEmail)}>
+                                <MaterialIcons name="edit" size={24} color="white" />
+                            </TouchableOpacity>
+                        </View>}
+
+                    {editPassword ?
+                        <View style={styles._email_input_main}>
+                            <TextInput
+                                placeholder="Email"
+                                style={styles._input}
+                                underlineColor="white"
+                                placeholderTextColor="white"
+                                value={password}
+                                onChangeText={onChangePassword}
+                                editable={true}
+                                returnKeyType={"next"}
+                                autoFocus={true}
+                                secureTextEntry={true}
+                            />
+                            <TouchableOpacity onPress={() => setEditPassword(!editPassword)}>
+                                <Feather name="check" size={24} color="white" />
+
+                            </TouchableOpacity>
+                        </View> : <View style={styles._email_input_main}>
+                            <TextInput
+                                placeholder="Email"
+                                style={styles._input}
+                                underlineColor="white"
+                                placeholderTextColor="white"
+                                value={password}
+                                onChangeText={onChangeEmail}
+                                editable={false}
+                                secureTextEntry={true}
+                            />
+                            <TouchableOpacity onPress={() => setEditPassword(!editPassword)}>
+                                <MaterialIcons name="edit" size={24} color="white" />
+                            </TouchableOpacity>
+                        </View>}
                 </View>
             </ScrollView>
         </View>

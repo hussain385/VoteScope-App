@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
 } from "react-native";
-
+import { Ionicons } from '@expo/vector-icons';
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const CityPolls = (props) => {
@@ -68,7 +68,12 @@ const CityPolls = (props) => {
     ]
     return (
         <View style={styles.container}>
-            <Text style={styles._heading}>POLLS</Text>
+            <View style={styles._header}>
+                <Text style={styles._heading}>POLLS</Text>
+                <TouchableOpacity onPress={()=> props.navigation.navigate("PollSelect")}>
+                    <Ionicons name="ios-shield-checkmark" size={34} color="white" />
+                </TouchableOpacity>
+            </View>
             <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
                 <View style={styles._main} >
                     {Polls.map((v, i) => {
@@ -77,7 +82,7 @@ const CityPolls = (props) => {
                                 <Text style={styles._poll_Des}>{v.data}</Text>
                                 <TouchableOpacity
                                     style={styles.button}
-                                    onPress= {() => props.navigation.navigate("PollResult")}
+                                    onPress={() => props.navigation.navigate("PollResult")}
                                 >
                                     <Text style={styles._button_txt}>View</Text>
                                 </TouchableOpacity>
@@ -98,10 +103,15 @@ const styles = StyleSheet.create({
     _heading: {
         color: "white",
         fontSize: 50,
-        marginTop: 50,
         fontFamily: "Poppins-SemiBold",
         letterSpacing: 0.5,
-        marginLeft: 20,
+    },
+    _header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop: 50,
+        paddingHorizontal: 20
     },
     _main: {
         paddingHorizontal: 20,
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
-        marginBottom:10
+        marginBottom: 10
     },
     button: {
         width: "20%",

@@ -97,7 +97,7 @@ const SignIn = (props) => {
                     </TouchableOpacity>
 
                     <View style={styles._forgt_passwrod}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=> props.navigation.navigate("ForgotPassword")}>
                             <Text style={styles._register}>Forgot Password ?</Text>
                         </TouchableOpacity>
                     </View>
