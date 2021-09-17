@@ -8,6 +8,7 @@ import {
     ScrollView,
     Animated
 } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 const window = Dimensions.get("window");
@@ -48,7 +49,12 @@ const ConstituentPoll = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles._heading}>POLL</Text>
+            <View style={styles._header}>
+                <Text style={styles._heading}>POLL</Text>
+                <TouchableOpacity onPress={()=> props.navigation.navigate("Setting")}>
+                <Ionicons name="settings-outline" size={44} color="white" />
+                </TouchableOpacity>
+            </View>
             <View style={{ margin: 20 }}>
                 <ScrollView style={styles.scrollView} horizontal={true} showsHorizontalScrollIndicator={false}>
 
@@ -109,11 +115,8 @@ const styles = StyleSheet.create({
     _heading: {
         color: "white",
         fontSize: 50,
-        marginTop: 80,
-        marginBottom: 40,
         fontFamily: "Poppins-SemiBold",
         letterSpacing: 0.5,
-        marginLeft: 20,
     },
     button: {
         width: "100%",
@@ -168,6 +171,15 @@ const styles = StyleSheet.create({
         color: "white",
         alignSelf: "center",
         fontFamily: "Poppins-SemiBold",
+    },
+    _header: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop: 80,
+        marginBottom: 40,
+        paddingHorizontal:20
+
     }
 });
 
