@@ -5,7 +5,8 @@ import CityPolls from './CityPolls/CityPolls';
 import PollResult from './PollResult/PollResult';
 import Setting from './Setting/Setting';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
-import PollSelect from './PollSelect/PollSelect'
+import PollSelect from './PollSelect/PollSelect';
+import CreatePoll from './CreatePoll/CreatePoll'
 export {
     SignUp,
     SignIn,
@@ -14,5 +15,6 @@ export {
     PollResult,
     Setting,
     ForgotPassword,
-    PollSelect
+    PollSelect,
+    CreatePoll
 }

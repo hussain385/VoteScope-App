@@ -11,7 +11,8 @@ import {
     PollResult,
     Setting,
     ForgotPassword,
-    PollSelect
+    PollSelect,
+    CreatePoll
 } from './../../Screens/index'
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ function Navigation() {
                 <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }}/>
                 <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }}/>
                 <Stack.Screen name="PollSelect" component={PollSelect} options={{ headerShown: false }}/>
+                <Stack.Screen name="CreatePoll" component={CreatePoll} options={{ headerShown: false }}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
