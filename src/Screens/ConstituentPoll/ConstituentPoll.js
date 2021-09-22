@@ -49,19 +49,20 @@ const ConstituentPoll = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles._header}>
-                <Text style={styles._heading}>POLL</Text>
-                <TouchableOpacity onPress={()=> props.navigation.navigate("Setting")}>
-                <Ionicons name="settings-outline" size={44} color="white" />
-                </TouchableOpacity>
-            </View>
+
             <View style={{ margin: 20 }}>
-                <ScrollView style={styles._scrollView} horizontal={true} showsHorizontalScrollIndicator={false}   pagingEnabled={true}>
+                <ScrollView style={styles._scrollView} horizontal={true} showsHorizontalScrollIndicator={false} pagingEnabled={true}>
 
                     <View style={styles._main} >
                         {PollCardData.map((v, i) => {
                             return (
                                 <View style={styles._data_main} key={i}>
+                                    <View style={styles._header}>
+                                        <Text style={styles._heading}>POLL</Text>
+                                        <TouchableOpacity onPress={() => props.navigation.navigate("Setting")}>
+                                            <Ionicons name="settings-outline" size={44} color="white" />
+                                        </TouchableOpacity>
+                                    </View>
                                     <View style={styles._counter_main}>
                                         <CountdownCircleTimer
                                             isPlaying
@@ -149,7 +150,8 @@ const styles = StyleSheet.create({
     },
     _counter_main: {
         alignSelf: "flex-end",
-        flexDirection: "row"
+        flexDirection: "row",
+        marginTop:50
     },
     _poll: {
         color: "white",
@@ -175,9 +177,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginTop: 80,
+        marginTop: 20,
         marginBottom: 40,
-        paddingHorizontal:20
 
     },
 });
