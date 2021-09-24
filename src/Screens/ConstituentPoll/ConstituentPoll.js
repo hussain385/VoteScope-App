@@ -50,13 +50,12 @@ const ConstituentPoll = (props) => {
     return (
         <View style={styles.container}>
 
-            <View style={{ margin: 20 }}>
-                <ScrollView style={styles._scrollView} horizontal={true} showsHorizontalScrollIndicator={false} pagingEnabled={true}>
+            <View >
+                <ScrollView style={{width: screen.width}} horizontal={true} showsHorizontalScrollIndicator={false} pagingEnabled={true}>
 
-                    <View style={styles._main} >
                         {PollCardData.map((v, i) => {
                             return (
-                                <View style={styles._data_main} key={i}>
+                                <View style={[styles._data_main,{width: screen.width}]} key={i}>
                                     <View style={styles._header}>
                                         <Text style={styles._heading}>POLL</Text>
                                         <TouchableOpacity onPress={() => props.navigation.navigate("Setting")}>
@@ -101,7 +100,6 @@ const ConstituentPoll = (props) => {
                                 </View>
                             )
                         })}
-                    </View>
                 </ScrollView>
             </View>
         </View>
@@ -146,7 +144,8 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         borderRadius: 10,
         padding: 10,
-        width: 320,
+        // width:"1%",
+        // flex:1
     },
     _counter_main: {
         alignSelf: "flex-end",
