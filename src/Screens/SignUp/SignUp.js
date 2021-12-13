@@ -40,7 +40,7 @@ const SignUp = (props) => {
         try {
           await AsyncStorage.setItem("user", JSON.stringify(rue));
           if (rue === "") {
-            alert("Please Select Rue !")
+            alert("Please Select Role !")
           } else if (rue === "city") {
             props.navigation.navigate("CityPolls");
           }
@@ -125,8 +125,8 @@ const SignUp = (props) => {
                             selectedValue={rue}
                             minWidth={200}
                             color="white"
-                            accessibilityLabel="Select Rue"
-                            placeholder="Select Rue"
+                            accessibilityLabel="Select Role"
+                            placeholder="Select Role"
                             dropdownIcon={ <Feather 
                                 name="chevron-down"
                                 size={24}

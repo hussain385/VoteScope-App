@@ -28,22 +28,22 @@ const ConstituentPoll = (props) => {
 
     let PollCardData = [
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
         {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. We do not tolerate any cheating that is done and will annul all votes that are indicated by bots"
+            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
         },
     ]
 
@@ -94,7 +94,12 @@ const ConstituentPoll = (props) => {
                                     <TouchableOpacity
                                         style={styles.button}
                                     >
-                                        <Text style={styles._button_txt}>Dis Approve</Text>
+                                        <Text style={styles._button_txt}>Disapprove</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                    >
+                                        <Text style={styles._button_txt}>No Opinion</Text>
                                     </TouchableOpacity>
                                     <Text style={styles._total_poll}>{i + 1} / {PollCardData.length}</Text>
                                 </View>
