@@ -39,42 +39,7 @@ const CreatePoll = (props) => {
                             multiline={true}
                         />
                     </View>
-                    <View style={styles._email_input_main}>
-                        <TextInput
-                            placeholder="Option 1"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                            multiline={true}
-                        />
-                    </View>
-                    <View style={styles._email_input_main}>
-                        <TextInput
-                            placeholder="Option 2"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                            multiline={true}
-                        />
-                    </View>
-                    <View style={styles._email_input_main}>
-                        <TextInput
-                            placeholder="Option 3"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                            multiline={true}
-                        />
-                    </View>
-                    <View style={styles._email_input_main}>
-                        <TextInput
-                            placeholder="Option 4"
-                            style={styles._input}
-                            underlineColor="white"
-                            placeholderTextColor="white"
-                            multiline={true}
-                        />
-                    </View>
+                    
                     <TouchableOpacity
                         style={styles.button}
                         onPress={()=> props.navigation.goBack()}
