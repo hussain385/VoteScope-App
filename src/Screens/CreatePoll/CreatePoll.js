@@ -7,11 +7,14 @@ import {
     TouchableOpacity,
     ScrollView,
     TextInput,
+    Alert,
 } from "react-native";
+import api from "../../Service/api";
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const CreatePoll = (props) => {
     const [dimensions, setDimensions] = useState({ window, screen });
+    const [question, setQuestion] = useState("")
     const onChange = ({ window, screen }) => {
         setDimensions({ window, screen });
     };
@@ -22,6 +25,29 @@ const CreatePoll = (props) => {
             Dimensions.removeEventListener("change", onChange);
         };
     });
+
+    const onCreate = async () => {
+        try {
+            const data = await api.addPolls({ question })
+            console.log(data);
+            if (data.return === 100){
+                Alert.alert("Successes", "Poll added successfully", [
+                    {
+                      text: "Ok",
+                      onPress: () => props.navigation.goBack(),
+                      style: "cancel",
+                    },
+                  ],)
+                
+            }
+            else {
+                Alert.alert("Error", "Something went wrong. Try again!")
+            }
+        } catch (e) {
+            Alert.alert("Try Again!", "Something went wrong!")
+        }
+    }
+
     return (
         <View style={styles.container}>
 
@@ -37,12 +63,13 @@ const CreatePoll = (props) => {
                             underlineColor="white"
                             placeholderTextColor="white"
                             multiline={true}
+                            onChangeText={(value) => {setQuestion(value)}}
                         />
                     </View>
                     
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={()=> props.navigation.goBack()}
+                        onPress={onCreate}
                     >
                         <Text style={styles._button_txt}>Create</Text>
                     </TouchableOpacity>
