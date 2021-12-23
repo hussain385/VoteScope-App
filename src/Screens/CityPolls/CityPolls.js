@@ -96,6 +96,7 @@ const CityPolls = (props) => {
                     onPress={() =>
                       props.navigation.navigate("PollResult", {
                         poll_id: parse.int(v.id),
+                        question: v.question,
                       })
                     }
                   >

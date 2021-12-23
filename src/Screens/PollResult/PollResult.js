@@ -13,6 +13,7 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const PollResult = ({ route, navigation }) => {
   const { poll_id } = route.params;
+  const { question } = route.params;
   const [dimensions, setDimensions] = useState({ window, screen });
   const [pollsResult, setPollsResult] = useState([]);
   const onChange = ({ window, screen }) => {
@@ -46,10 +47,7 @@ const PollResult = ({ route, navigation }) => {
       >
         <View style={styles._main}>
           <View style={styles._card}>
-            <Text style={styles._poll_Des}>
-              The Top 5 Email Design Trends to Watch for in 2019 The Top 5 Email
-              Design Trends to Watch for in 2019
-            </Text>
+            <Text style={styles._poll_Des}>{question}</Text>
           </View>
           <PieChart
             data={[
