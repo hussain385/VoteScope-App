@@ -6,6 +6,10 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicatorComponent,
+  Modal,
+  TextInput,
+  Pressable,
 } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 import api from "../../Service/api";
@@ -14,8 +18,10 @@ const screen = Dimensions.get("screen");
 const PollResult = ({ route, navigation }) => {
   const { poll_id } = route.params;
   const { question } = route.params;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [text, onChangeText] = React.useState(question);
   const [dimensions, setDimensions] = useState({ window, screen });
-  const [pollsResult, setPollsResult] = useState([]);
+  const [pollsResult, setPollsResult] = useState(null);
   const onChange = ({ window, screen }) => {
     setDimensions({ window, screen });
   };
@@ -32,11 +38,16 @@ const PollResult = ({ route, navigation }) => {
       const data = await api.getPollResult({
         poll_id,
       });
-      setPollsResult(data);
-      console.log(pollsResult);
+      setPollsResult([data]);
     };
     getPolls();
   }, []);
+
+  const editQuestion = async () => {
+    await api.editPoll({ poll_id: poll_id, question: text });
+    question = text;
+    setModalVisible(!modalVisible);
+  };
 
   return (
     <View style={styles.container}>
@@ -46,28 +57,31 @@ const PollResult = ({ route, navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles._main}>
-          <View style={styles._card}>
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            style={styles._card}
+          >
             <Text style={styles._poll_Des}>{question}</Text>
-          </View>
+          </TouchableOpacity>
           <PieChart
             data={[
               {
                 name: "Approve",
-                population: pollsResult.approve,
+                population: pollsResult?.approve || 0,
                 color: "rgba(131, 167, 234, 1)",
                 legendFontColor: "#7F7F7F",
                 legendFontSize: 11,
               },
               {
                 name: "Dis Approve",
-                population: pollsResult.disapprove,
+                population: pollsResult?.disapprove || 0,
                 color: "#F00",
                 legendFontColor: "#7F7F7F",
                 legendFontSize: 11,
               },
               {
                 name: "No Options",
-                population: pollsResult.no_opinion,
+                population: pollsResult?.no_opinion || 0,
                 color: "#ffffff",
                 legendFontColor: "#7F7F7F",
                 legendFontSize: 11,
@@ -102,6 +116,29 @@ const PollResult = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <Pressable
+          onPress={() => setModalVisible(!modalVisible)}
+          style={styles.centeredView}
+        >
+          <View style={styles.modalView}>
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeText}
+              value={text}
+              placeholder="Question"
+              keyboardType="default"
+              multiline={true}
+            />
+            <TouchableOpacity
+              style={[styles.buttonModal, styles.buttonClose]}
+              onPress={editQuestion}
+            >
+              <Text style={styles.textStyle}>Change Question</Text>
+            </TouchableOpacity>
+          </View>
+        </Pressable>
+      </Modal>
     </View>
   );
 };
@@ -155,6 +192,55 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     letterSpacing: 0.5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor: "rgba(90, 90, 90, 0.473)",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonModal: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+    marginTop: 10,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  input: {
+    margin: 12,
+    borderWidth: 1,
+    padding: 5,
+    width: Dimensions.get("screen").width * 0.7,
   },
 });
 

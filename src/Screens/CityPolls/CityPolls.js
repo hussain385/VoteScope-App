@@ -41,16 +41,34 @@ const CityPolls = (props) => {
         poll_date_end,
       });
       setPolls(data);
-      console.log(polls);
     };
     getPolls();
   }, []);
 
   const checkChange = async (value, id) => {
+    console.log("checked");
     if (value) {
       await api.setChecked({ poll_id: id });
+      const poll_date_start = moment()
+        .subtract(1, "months")
+        .format("YYYY-MM-DD");
+      const poll_date_end = moment().add(1, "months").format("YYYY-MM-DD");
+      const data = await api.getPollsManyAll({
+        poll_date_start,
+        poll_date_end,
+      });
+      setPolls(data);
     } else {
       await api.setUnchecked({ poll_id: id });
+      const poll_date_start = moment()
+        .subtract(1, "months")
+        .format("YYYY-MM-DD");
+      const poll_date_end = moment().add(1, "months").format("YYYY-MM-DD");
+      const data = await api.getPollsManyAll({
+        poll_date_start,
+        poll_date_end,
+      });
+      setPolls(data);
     }
   };
 
@@ -95,7 +113,7 @@ const CityPolls = (props) => {
                     style={styles.button}
                     onPress={() =>
                       props.navigation.navigate("PollResult", {
-                        poll_id: parse.int(v.id),
+                        poll_id: v.id,
                         question: v.question,
                       })
                     }

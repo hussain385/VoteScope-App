@@ -10,7 +10,7 @@ const login = async ({ username, password }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/login",
+    "https://sweet-treefrog-32.loca.lt/login",
     payload
   );
   return data;
@@ -26,7 +26,7 @@ const signup = async ({ username, password, type }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/signup",
+    "https://sweet-treefrog-32.loca.lt/signup",
     payload
   );
   return data;
@@ -39,7 +39,7 @@ const setPollResult = async ({ poll_id, answer }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/set_result_of_poll",
+    "https://sweet-treefrog-32.loca.lt/set_result_of_poll",
     payload
   );
   return data;
@@ -51,7 +51,7 @@ const getPollResult = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_result_of_poll",
+    "https://sweet-treefrog-32.loca.lt/get_result_of_poll",
     payload
   );
   return data;
@@ -63,8 +63,10 @@ const editPoll = async ({ poll_id, question }) => {
     question: question,
   };
 
+  console.log(payload);
+
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/edit_poll",
+    "https://sweet-treefrog-32.loca.lt/edit_poll",
     payload
   );
   return data;
@@ -76,7 +78,7 @@ const setUnchecked = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/set_unchecked",
+    "https://sweet-treefrog-32.loca.lt/set_unchecked",
     payload
   );
   return data;
@@ -88,7 +90,7 @@ const setChecked = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/set_checked",
+    "https://sweet-treefrog-32.loca.lt/set_checked",
     payload
   );
   return data;
@@ -102,7 +104,7 @@ const addPolls = async ({ question }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/add_polls",
+    "https://sweet-treefrog-32.loca.lt/add_polls",
     payload
   );
   return data;
@@ -114,7 +116,7 @@ const getPollDate = async ({ poll_date }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_poll_date",
+    "https://sweet-treefrog-32.loca.lt/get_poll_date",
     payload
   );
   return data;
@@ -122,7 +124,7 @@ const getPollDate = async ({ poll_date }) => {
 
 const getPollsSingular = async ({ poll_id }) => {
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_polls_singular"
+    "https://sweet-treefrog-32.loca.lt/get_polls_singular"
   );
   return data;
 };
@@ -133,7 +135,7 @@ const getPoll = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_poll",
+    "https://sweet-treefrog-32.loca.lt/get_poll",
     payload
   );
   return data;
@@ -148,7 +150,7 @@ const getPollsManyAll = async ({ poll_date_start, poll_date_end }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_polls_many_all",
+    "https://sweet-treefrog-32.loca.lt/get_polls_many_all",
     payload
   );
   return data;
@@ -162,7 +164,7 @@ const getPollsManyChecked = async ({ poll_date_start, poll_date_end }) => {
   };
 
   const { data } = await axios.post(
-    "https://tricky-puma-78.loca.lt/get_polls_many_checked",
+    "https://sweet-treefrog-32.loca.lt/get_polls_many_checked",
     payload
   );
   return data;

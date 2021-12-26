@@ -15,6 +15,7 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const ConstituentPoll = (props) => {
     const [dimensions, setDimensions] = useState({ window, screen });
+    const [PollCardData, setPollCardData] = useState([]);
     const onChange = ({ window, screen }) => {
         setDimensions({ window, screen });
     };
@@ -26,26 +27,20 @@ const ConstituentPoll = (props) => {
         };
     });
 
-    let PollCardData = [
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-        {
-            data: "Doing multiple selections is not allowed. Duplication checks are based on the IP address of the voter. "
-        },
-    ]
+    useEffect(() => {
+        const getPolls = async () => {
+          const poll_date_start = moment()
+            .subtract(1, "months")
+            .format("YYYY-MM-DD");
+          const poll_date_end = moment().add(1, "months").format("YYYY-MM-DD");
+          const data = await api.getPollsManyAll({
+            poll_date_start,
+            poll_date_end,
+          });
+          setPollCardData(data);
+        };
+        getPolls();
+      }, []);
 
     return (
         <View style={styles.container}>
