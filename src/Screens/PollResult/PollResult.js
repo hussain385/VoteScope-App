@@ -21,7 +21,11 @@ const PollResult = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [text, onChangeText] = React.useState(question);
   const [dimensions, setDimensions] = useState({ window, screen });
-  const [pollsResult, setPollsResult] = useState(null);
+  const [pollsResult, setPollsResult] = useState([{
+    approve: 0,
+    disapprove: 0,
+    no_opinion: 0
+  }]);
   const onChange = ({ window, screen }) => {
     setDimensions({ window, screen });
   };
@@ -38,7 +42,11 @@ const PollResult = ({ route, navigation }) => {
       const data = await api.getPollResult({
         poll_id,
       });
-      setPollsResult([data]);
+      setPollsResult([{
+        approve: data?.approve,
+        disapprove: data?.disapprove,
+        no_opinion: data?.no_opinion
+      }]);
     };
     getPolls();
   }, []);

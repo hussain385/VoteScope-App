@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   StyleSheet,
@@ -16,6 +16,7 @@ import api from "../../Service/api";
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const ConstituentPoll = (props) => {
+  const scrollRef = useRef();
   const [dimensions, setDimensions] = useState({ window, screen });
   const [PollCardData, setPollCardData] = useState([]);
   const onChange = ({ window, screen }) => {
@@ -41,6 +42,7 @@ const ConstituentPoll = (props) => {
       });
       console.log(poll_date_start);
       setPollCardData(data);
+      timer(data);
     };
     getPolls();
   }, []);
@@ -52,38 +54,65 @@ const ConstituentPoll = (props) => {
     });
   };
 
+  const timer = (data) => {
+    const count = data.length;
+    const data1 = data;
+    console.log("timer", data);
+    for (let index = 1; index <= count; index++) {
+      setTimeout(() => {
+        console.log("next", index, count);
+        data1.shift();
+        setPollCardData(data1);
+        console.log(PollCardData);
+      }, index * 10000);
+    }
+  };
+
+  const onPressTouch = () => {
+    console.log("sas");
+    scrollRef.current?.scrollTo({
+      x: 1,
+      animated: true,
+    });
+  };
+  return (
+    <View>
+      <Text>{JSON.stringify(PollCardData, null, 2)}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={{ marginTop: 20 }} onPress={onPressTouch}>
+        <Text>fwefew</Text>
+      </TouchableOpacity>
       <View>
         <ScrollView
           style={{ width: screen.width }}
           horizontal={true}
+          ref={scrollRef}
           showsHorizontalScrollIndicator={false}
           pagingEnabled={true}
         >
-          {PollCardData.map((v, i) => {
+          {PollCardData.map((v) => {
             return (
               <View
                 style={[styles._data_main, { width: screen.width }]}
-                key={i}
+                key={v.id}
               >
                 <View style={styles._header}>
                   <Text style={styles._heading}>POLL</Text>
                   <TouchableOpacity
-                    onPress={() => props.navigation.navigate("Setting")}
+                    // onPress={() => props.navigation.navigate("Setting")}
+                    onPress={onPressTouch}
                   >
                     <Ionicons name="settings-outline" size={44} color="white" />
                   </TouchableOpacity>
                 </View>
                 <View style={styles._counter_main}>
-                  <CountdownCircleTimer
+                  {/* <CountdownCircleTimer
                     isPlaying
                     duration={10}
-                    colors={[
-                      ["white", 0.4],
-                      // ['#F7B801', 0.4],
-                      // ['#A30000', 0.2],
-                    ]}
                     size={30}
                     strokeWidth={2}
                     trailColor="#1ED760"
@@ -93,7 +122,7 @@ const ConstituentPoll = (props) => {
                         {remainingTime}
                       </Animated.Text>
                     )}
-                  </CountdownCircleTimer>
+                  </CountdownCircleTimer> */}
                 </View>
                 <View>
                   <Text style={styles._poll}>Poll : </Text>
@@ -123,9 +152,9 @@ const ConstituentPoll = (props) => {
                 >
                   <Text style={styles._button_txt}>No Opinion</Text>
                 </TouchableOpacity>
-                <Text style={styles._total_poll}>
+                {/* <Text style={styles._total_poll}>
                   {i + 1} / {PollCardData.length}
-                </Text>
+                </Text> */}
               </View>
             );
           })}

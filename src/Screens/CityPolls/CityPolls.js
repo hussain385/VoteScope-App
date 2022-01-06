@@ -100,13 +100,7 @@ const CityPolls = (props) => {
                   )}
                 </View>
                 <View style={styles._card2}>
-                  <TextInput
-                    value={v.question}
-                    style={styles._poll_Des}
-                    underlineColor="white"
-                    placeholderTextColor="white"
-                    multiline={true}
-                  />
+                  <Text style={styles._poll_Des}>{v.question}</Text>
                 </View>
                 <View style={styles._card3}>
                   <TouchableOpacity
