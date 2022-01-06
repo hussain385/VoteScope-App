@@ -1,27 +1,27 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
 import moment from "moment";
 import api from "../../Service/api";
-import {CountdownCircleTimer} from "react-native-countdown-circle-timer";
+import VoteCard from "./card";
 
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const ConstituentPoll = (props) => {
     const scrollRef = useRef();
-    const [dimensions, setDimensions] = useState({window, screen});
+    const [pollData, setPollData] = useState([]);
     const [PollCardData, setPollCardData] = useState([]);
-    // const onChange = ({window, screen}) => {
-    //     setDimensions({window, screen});
-    // };
+    const [index, setIndex] = useState(0);
 
-    useEffect(() => {
-        // Dimensions.addEventListener("change", onChange);
-        // return () => {
-        //     Dimensions.removeEventListener("change", onChange);
-        // };
-        console.log(PollCardData, 'testing')
-    }, [PollCardData]);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setPollCardData();
+    //     }, 10000);
+    // }, [PollCardData]);
+
+    const timeOut = () => {
+        setIndex(prev => prev + 1)
+        setPollCardData(pollData[index]);
+    }
 
     useEffect(() => {
         const getPolls = async () => {
@@ -33,7 +33,8 @@ const ConstituentPoll = (props) => {
                 poll_date_start,
                 poll_date_end,
             });
-            timer(data);
+            setPollData(data);
+            setPollCardData(data[index])
         };
         getPolls();
     }, []);
@@ -43,23 +44,9 @@ const ConstituentPoll = (props) => {
             poll_id: poll_id,
             answer: answer,
         });
+        timeOut();
     };
 
-    const timer = (data) => {
-        const count = data.length;
-        setPollCardData(data);
-        const data1 = data;
-        console.log("timer", data);
-        for (let index = 1; index <= count; index++) {
-            setTimeout(() => {
-                setPollCardData([]);
-                data1.shift();
-                console.log("next", index, count, data1);
-                setPollCardData(data1);
-                console.log(PollCardData);
-            }, index * 10000);
-        }
-    };
 
     const onPressTouch = () => {
         console.log("sas");
@@ -82,70 +69,8 @@ const ConstituentPoll = (props) => {
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled={true}
                 >
-                    {PollCardData.map((v) => {
-                        return (
-                            <View
-                                style={[styles._data_main, {width: screen.width}]}
-                                key={v.id}
-                            >
-                                <View style={styles._header}>
-                                    <Text style={styles._heading}>POLL</Text>
-                                    <TouchableOpacity
-                                        // onPress={() => props.navigation.navigate("Setting")}
-                                        onPress={onPressTouch}
-                                    >
-                                        <Ionicons name="settings-outline" size={44} color="white"/>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles._counter_main}>
-                                    {/*<CountdownCircleTimer*/}
-                                    {/*    isPlaying*/}
-                                    {/*    duration={10}*/}
-                                    {/*    size={30}*/}
-                                    {/*    strokeWidth={2}*/}
-                                    {/*    trailColor="#1ED760"*/}
-                                    {/*>*/}
-                                    {/*    {({remainingTime}) => (*/}
-                                    {/*        <Animated.Text style={styles._timer}>*/}
-                                    {/*            {remainingTime}*/}
-                                    {/*        </Animated.Text>*/}
-                                    {/*    )}*/}
-                                    {/*</CountdownCircleTimer>*/}
-                                </View>
-                                <View>
-                                    <Text style={styles._poll}>Poll : </Text>
-                                    <Text style={styles._poll_Des}>{v.question}</Text>
-                                </View>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => {
-                                        setPoll("approve", v.id);
-                                    }}
-                                >
-                                    <Text style={styles._button_txt}>Approve</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => {
-                                        setPoll("disapprove", v.id);
-                                    }}
-                                >
-                                    <Text style={styles._button_txt}>Disapprove</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={() => {
-                                        setPoll("no_opinion", v.id);
-                                    }}
-                                >
-                                    <Text style={styles._button_txt}>No Opinion</Text>
-                                </TouchableOpacity>
-                                {/* <Text style={styles._total_poll}>
-                  {i + 1} / {PollCardData.length}
-                </Text> */}
-                            </View>
-                        );
-                    })}
+                    <VoteCard item={PollCardData} setPoll={setPoll} onPressTouch={onPressTouch} timeOut={timeOut}/>
+
                 </ScrollView>
             </View>
         </View>
