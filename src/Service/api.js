@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+const apiUrl = 'https://serious-wolverine-21.loca.lt';
 
 const login = async ({ username, password }) => {
   const payload = {
@@ -10,7 +11,7 @@ const login = async ({ username, password }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/login",
+    `${apiUrl}/login`,
     payload
   );
   return data;
@@ -26,7 +27,7 @@ const signup = async ({ username, password, type }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/signup",
+    `${apiUrl}/signup`,
     payload
   );
   return data;
@@ -39,7 +40,7 @@ const setPollResult = async ({ poll_id, answer }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/set_result_of_poll",
+    `${apiUrl}/set_result_of_poll`,
     payload
   );
   return data;
@@ -51,7 +52,7 @@ const getPollResult = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_result_of_poll",
+    `${apiUrl}/get_result_of_poll`,
     payload
   );
   return data;
@@ -66,7 +67,7 @@ const editPoll = async ({ poll_id, question }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/edit_poll",
+      `${apiUrl}/edit_poll`,
     payload
   );
   return data;
@@ -78,7 +79,7 @@ const setUnchecked = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/set_unchecked",
+    `${apiUrl}/set_unchecked`,
     payload
   );
   return data;
@@ -90,7 +91,7 @@ const setChecked = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/set_checked",
+    `${apiUrl}/set_checked`,
     payload
   );
   return data;
@@ -104,7 +105,7 @@ const addPolls = async ({ question }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/add_polls",
+    `${apiUrl}/add_polls`,
     payload
   );
   return data;
@@ -116,7 +117,7 @@ const getPollDate = async ({ poll_date }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_poll_date",
+    `${apiUrl}/get_poll_date`,
     payload
   );
   return data;
@@ -124,7 +125,7 @@ const getPollDate = async ({ poll_date }) => {
 
 const getPollsSingular = async ({ poll_id }) => {
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_polls_singular"
+    `${apiUrl}/get_polls_singular`
   );
   return data;
 };
@@ -135,7 +136,7 @@ const getPoll = async ({ poll_id }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_poll",
+    `${apiUrl}/get_poll`,
     payload
   );
   return data;
@@ -150,7 +151,7 @@ const getPollsManyAll = async ({ poll_date_start, poll_date_end }) => {
   console.log(payload);
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_polls_many_all",
+    `${apiUrl}/get_polls_many_all`,
     payload
   );
   return data;
@@ -164,7 +165,7 @@ const getPollsManyChecked = async ({ poll_date_start, poll_date_end }) => {
   };
 
   const { data } = await axios.post(
-    "https://odd-eel-51.loca.lt/get_polls_many_checked",
+    `${apiUrl}/get_polls_many_checked`,
     payload
   );
   return data;
