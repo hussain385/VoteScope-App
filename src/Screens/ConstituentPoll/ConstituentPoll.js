@@ -59,7 +59,6 @@ const ConstituentPoll = (props) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={{marginTop: 20}} onPress={onPressTouch}>
-                <Text>fwefew</Text>
             </TouchableOpacity>
             <View>
                 <ScrollView
@@ -70,7 +69,6 @@ const ConstituentPoll = (props) => {
                     pagingEnabled={true}
                 >
                     <VoteCard item={PollCardData} setPoll={setPoll} onPressTouch={onPressTouch} timeOut={timeOut}/>
-
                 </ScrollView>
             </View>
         </View>

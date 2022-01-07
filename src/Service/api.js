@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-const apiUrl = 'https://serious-wolverine-21.loca.lt';
+const apiUrl = 'https://perfect-firefox-4.loca.lt';
 
 const login = async ({ username, password }) => {
   const payload = {

@@ -8,7 +8,6 @@ const screen = Dimensions.get("screen");
 class VoteCard extends Component {
     render() {
         const {item, setPoll, onPressTouch, timeOut} = this.props;
-        console.log(item)
         return (
             <View
                 style={[styles._data_main, {width: screen.width}]}
@@ -25,19 +24,6 @@ class VoteCard extends Component {
                 </View>
                 <View style={styles._counter_main}>
                     <Timer duration={10} timeoutFn={timeOut}/>
-                    {/*<CountdownCircleTimer*/}
-                    {/*    isPlaying*/}
-                    {/*    duration={10}*/}
-                    {/*    size={30}*/}
-                    {/*    strokeWidth={2}*/}
-                    {/*    trailColor="#1ED760"*/}
-                    {/*>*/}
-                    {/*    {({remainingTime}) => (*/}
-                    {/*        <Animated.Text style={styles._timer}>*/}
-                    {/*            {remainingTime}*/}
-                    {/*        </Animated.Text>*/}
-                    {/*    )}*/}
-                    {/*</CountdownCircleTimer>*/}
                 </View>
                 <View>
                     <Text style={styles._poll}>Poll : </Text>

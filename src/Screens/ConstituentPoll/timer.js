@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 class Timer extends Component {
     constructor(props) {
@@ -32,7 +33,22 @@ class Timer extends Component {
         const { duration } = this.props;
         let timeLeft = duration - this.state.seconds;
         return <View>
-            <Text>Time Left: {timeLeft}</Text>
+            <AnimatedCircularProgress
+                size={50}
+                width={5}
+                fill={timeLeft * 10}
+                tintColor="#00e0ff"
+                onAnimationComplete={() => console.log('onAnimationComplete')}
+                backgroundColor="#3d5875">
+                {
+                    (fill) => (
+                        <Text style={{ fontSize: 15, color: 'white', }}>
+                            { timeLeft }
+                        </Text>
+                    )
+                }
+            </AnimatedCircularProgress>
+            {/*<Text>Time Left: {timeLeft}</Text>*/}
         </View>;
     }
 }
