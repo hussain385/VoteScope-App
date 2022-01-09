@@ -9,54 +9,63 @@ class VoteCard extends Component {
     render() {
         const {item, setPoll, onPressTouch, timeOut} = this.props;
         return (
-            <View
-                style={[styles._data_main, {width: screen.width}]}
-                key={item.id}
-            >
-                <View style={styles._header}>
-                    <Text style={styles._heading}>POLL</Text>
+            <>{item ? (
+                <View
+                    style={[styles._data_main, {width: screen.width}]}
+                    key={item.id}
+                >
+                    <View style={styles._header}>
+                        <Text style={styles._heading}>POLL</Text>
+                        <TouchableOpacity
+                            // onPress={() => props.navigation.navigate("Setting")}
+                            onPress={onPressTouch}
+                        >
+                            <Ionicons name="settings-outline" size={44} color="white"/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles._counter_main}>
+                        <Timer duration={10} timeoutFn={timeOut}/>
+                    </View>
+                    <View>
+                        <Text style={styles._poll}>Poll : </Text>
+                        <Text style={styles._poll_Des}>{item.question}</Text>
+                    </View>
                     <TouchableOpacity
-                        // onPress={() => props.navigation.navigate("Setting")}
-                        onPress={onPressTouch}
+                        style={styles.button}
+                        onPress={() => {
+                            setPoll("approve", item.id);
+                        }}
                     >
-                        <Ionicons name="settings-outline" size={44} color="white"/>
+                        <Text style={styles._button_txt}>Approve</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles._counter_main}>
-                    <Timer duration={10} timeoutFn={timeOut}/>
-                </View>
-                <View>
-                    <Text style={styles._poll}>Poll : </Text>
-                    <Text style={styles._poll_Des}>{item.question}</Text>
-                </View>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        setPoll("approve", item.id);
-                    }}
-                >
-                    <Text style={styles._button_txt}>Approve</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        setPoll("disapprove", item.id);
-                    }}
-                >
-                    <Text style={styles._button_txt}>Disapprove</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        setPoll("no_opinion", item.id);
-                    }}
-                >
-                    <Text style={styles._button_txt}>No Opinion</Text>
-                </TouchableOpacity>
-                {/* <Text style={styles._total_poll}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            setPoll("disapprove", item.id);
+                        }}
+                    >
+                        <Text style={styles._button_txt}>Disapprove</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            setPoll("no_opinion", item.id);
+                        }}
+                    >
+                        <Text style={styles._button_txt}>No Opinion</Text>
+                    </TouchableOpacity>
+                    {/* <Text style={styles._total_poll}>
                   {i + 1} / {PollCardData.length}
                 </Text> */}
-            </View>
+                </View>
+            ) : (
+                <View
+                    style={styles.card}>
+                    <Text style={{fontSize: 20, fontWeight: '600', color: 'white'}}>
+                        NO POLLS
+                    </Text>
+                </View>
+            )}</>
         );
     }
 }
@@ -71,6 +80,13 @@ const styles = StyleSheet.create({
         fontSize: 50,
         fontFamily: "Poppins-SemiBold",
         letterSpacing: 0.5,
+    },
+    card: {
+        height: Dimensions.get("screen").height,
+        width: Dimensions.get("screen").width,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
     },
     button: {
         width: "100%",
